@@ -4,6 +4,9 @@ import java.nio.file.Path
 import java.nio.file.StandardWatchEventKinds
 import java.nio.file.WatchService
 
+/**
+ * creates a file watcher from the path
+ */
 public fun Path.watch() : WatchService {
     //Create a watch service
     val watchService = this.fileSystem.newWatchService()

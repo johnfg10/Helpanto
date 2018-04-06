@@ -10,21 +10,16 @@ import java.nio.file.Paths
 import java.nio.file.StandardWatchEventKinds
 import java.nio.file.WatchService
 
-//ajudant
+/**
+ * handles the creation and management of groovy scripts using the GroovyScriptEngine
+ */
 class GroovyScriptManager(val scriptPath: String) : AutoCloseable {
 
     val binding = Binding()
 
     val engine = GroovyScriptEngine(scriptPath)
 
-    init {
-
-    }
-
-    fun eval(string: String){
-
-    }
-
+/*
     fun fileWatcher(){
         val patha = Paths.get(URI(scriptPath))
         val watcherService = patha.fileSystem.newWatchService()
@@ -45,6 +40,7 @@ class GroovyScriptManager(val scriptPath: String) : AutoCloseable {
             key.reset()
         }
     }
+*/
 
     //acts as a shutdown hook
     override fun close() {

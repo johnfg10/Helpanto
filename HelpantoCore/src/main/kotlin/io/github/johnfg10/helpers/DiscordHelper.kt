@@ -6,7 +6,9 @@ import sun.security.jgss.GSSUtil.login
 import sx.blah.discord.api.ClientBuilder
 import sx.blah.discord.api.IDiscordClient
 
-
+/**
+ * creates a IDiscordClient from a token and either logs them in or returns a unlogged in instance
+ */
 fun createClient(token: String, login: Boolean): IDiscordClient? { // Returns a new instance of the Discord client
     val clientBuilder = ClientBuilder() // Creates the ClientBuilder instance
     clientBuilder.withToken(token) // Adds the login info to the builder
@@ -20,5 +22,4 @@ fun createClient(token: String, login: Boolean): IDiscordClient? { // Returns a 
         e.printStackTrace()
         return null
     }
-
 }

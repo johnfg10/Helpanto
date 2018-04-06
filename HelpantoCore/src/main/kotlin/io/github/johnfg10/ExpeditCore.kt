@@ -1,37 +1,43 @@
 package io.github.johnfg10
 
-import io.github.johnfg10.groovy.GroovyDenyAllFilter
+import io.github.johnfg10.groovy.GroovySandboxFiltering
 import io.github.johnfg10.groovy.GroovyShellManager
 import io.github.johnfg10.helpers.createClient
 import org.apache.commons.lang3.exception.ExceptionUtils
-import org.kohsuke.groovy.sandbox.GroovyValueFilter
 import sx.blah.discord.api.IDiscordClient
 import sx.blah.discord.api.events.EventSubscriber
 import sx.blah.discord.handle.impl.events.ReadyEvent
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent
 
-lateinit var client: IDiscordClient
-
 fun main(args: Array<String>) {
-    client = createClient("NDMxNDg1ODU0NzMzODI4MTA3.DafgXQ.QNsh9j-appUY9F5ZvdMf9qaxYxA", true)!!
-    val dispatcher = client.dispatcher
-    dispatcher.registerListener(ExpeditCore())
 }
 
-class ExpeditCore(){
+/*
+ * handles creation and management of the core discord object
+ */
+class ExpeditCore{
 
     private val groovyShellManager = GroovyShellManager()
+    private val client: IDiscordClient
 
     init {
+        val clientNullable = createClient("NDMxNDg1ODU0NzMzODI4MTA3.DafgXQ.QNsh9j-appUY9F5ZvdMf9qaxYxA", true)
+        if (clientNullable != null){
+            client = clientNullable
+        }else{
+            throw IllegalStateException("Discord client must not be null")
+        }
+        val dispatcher = client.dispatcher
+        dispatcher.registerListener(ExpeditCore())
     }
 
     @EventSubscriber
-    fun onReady(readyEvent: ReadyEvent){
-        GroovyDenyAllFilter().register()
+    private fun onReady(readyEvent: ReadyEvent){
+        GroovySandboxFiltering().register()
     }
 
     @EventSubscriber
-    fun onMessageReceivedEvent(event: MessageReceivedEvent){
+    private fun onMessageReceivedEvent(event: MessageReceivedEvent){
         val msg = event.message
         if (msg.content.startsWith("eval")){
             val msgContent = msg.content.replaceFirst("eval", "")

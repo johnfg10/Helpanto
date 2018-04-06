@@ -6,6 +6,9 @@ import org.codehaus.groovy.control.CompilerConfiguration
 import org.kohsuke.groovy.sandbox.GroovyValueFilter
 import org.kohsuke.groovy.sandbox.SandboxTransformer
 
+/**
+ * creates and manages a groovy shell and sandbox filter
+ */
 public class GroovyShellManager(val binding: Binding = Binding()) : AutoCloseable {
 
     val compConfig: CompilerConfiguration = CompilerConfiguration()
@@ -20,6 +23,9 @@ public class GroovyShellManager(val binding: Binding = Binding()) : AutoCloseabl
 
     }
 
+    /**
+     * evaluates the expression using the groovy shell
+     */
     public fun eval(expression: String) : Any? {
         return shell.evaluate(expression)
     }

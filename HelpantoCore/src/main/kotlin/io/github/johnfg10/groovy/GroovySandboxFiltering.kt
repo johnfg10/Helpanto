@@ -9,7 +9,9 @@ import java.io.InvalidClassException
 import java.math.BigDecimal
 import java.math.BigInteger
 
-
+/**
+ * filters unwanted code calls out of script codes
+ */
 class GroovySandboxFiltering : GroovyValueFilter() {
     override fun filter(o: Any?): Any {
         if (o != null) {

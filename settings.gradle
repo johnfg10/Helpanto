@@ -1,0 +1,3 @@
+rootProject.name = 'Expedit_Groovy'
+include 'HelpantoCore'
+

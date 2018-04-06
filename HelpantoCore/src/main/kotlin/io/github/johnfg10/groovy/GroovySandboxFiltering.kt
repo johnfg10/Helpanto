@@ -17,12 +17,12 @@ class GroovySandboxFiltering : GroovyValueFilter() {
         if (o != null) {
             val className = o::class.simpleName
             if (className != null){
-                println(!o::class.simpleName!!.matches(Regex("Script\\d")))
-                if(!o::class.simpleName!!.matches(Regex("Script\\d")) || o is Script ){
+                println(!className.matches(Regex("Script\\d")))
+                if(!className.matches(Regex("Script\\d")) || o is Script ){
                     if (allowedClasses.contains(o::class)){
                         return o
                     }
-                    if (o::class.simpleName!!.matches(Regex("Script\\d"))){
+                    if (className.matches(Regex("Script\\d"))){
                         return o
                     }
                     println("Name: " + o::class.simpleName)
